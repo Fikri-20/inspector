@@ -116,7 +116,7 @@ export function ToolsSidebar({
           <div className="h-[calc(100%-49px)] flex flex-col">
             <div className="flex-1 overflow-hidden">
               <ScrollArea className="h-full">
-                <div className="p-2">
+                <div className="p-2 pb-8">
                   {fetchingTools ? (
                     <div className="flex flex-col items-center justify-center py-16 text-center">
                       <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center mb-3">
@@ -148,6 +148,8 @@ export function ToolsSidebar({
                           onClick={() => onSelectTool(name)}
                         />
                       ))}
+                      {/* Spacer so last item can scroll fully into view */}
+                      <div className="h-10" aria-hidden />
                     </div>
                   )}
                 </div>
@@ -157,7 +159,7 @@ export function ToolsSidebar({
         ) : (
           <div className="h-full">
             <ScrollArea className="h-full">
-              <div className="p-3 space-y-1">
+              <div className="p-3 pb-8 space-y-1">
                 {savedRequests.length === 0 ? (
                   <div className="text-center py-8">
                     <p className="text-sm text-muted-foreground">
@@ -165,17 +167,21 @@ export function ToolsSidebar({
                     </p>
                   </div>
                 ) : (
-                  savedRequests.map((request) => (
-                    <SavedRequestItem
-                      key={request.id}
-                      request={request}
-                      isHighlighted={highlightedRequestId === request.id}
-                      onLoad={onLoadRequest}
-                      onRename={onRenameRequest}
-                      onDuplicate={onDuplicateRequest}
-                      onDelete={onDeleteRequest}
-                    />
-                  ))
+                  <div className="space-y-1">
+                    {savedRequests.map((request) => (
+                      <SavedRequestItem
+                        key={request.id}
+                        request={request}
+                        isHighlighted={highlightedRequestId === request.id}
+                        onLoad={onLoadRequest}
+                        onRename={onRenameRequest}
+                        onDuplicate={onDuplicateRequest}
+                        onDelete={onDeleteRequest}
+                      />
+                    ))}
+                    {/* Spacer so last saved request can scroll fully into view */}
+                    <div className="h-10" aria-hidden />
+                  </div>
                 )}
               </div>
             </ScrollArea>
