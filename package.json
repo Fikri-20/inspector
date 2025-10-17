@@ -40,6 +40,8 @@
     "build:server": "cd server && npm run build",
     "start": "NODE_ENV=production node bin/start.js",
     "prettier-fix": "prettier --write .",
+  "lint": "tsc -p client/tsconfig.json --noEmit && tsc -p server/tsconfig.json --noEmit && tsc -p sdk/tsconfig.json --noEmit",
+  "lint:format": "npm run prettier-fix",
     "install:deps": "npm --prefix server install --legacy-peer-deps && npm --prefix client install --legacy-peer-deps",
     "sync:lockfiles": "npm install --legacy-peer-deps --cache .npm-cache && npm --prefix client install --legacy-peer-deps --cache .npm-cache && npm --prefix server install --legacy-peer-deps --cache .npm-cache",
     "docker:build": "docker build -t mcpjam/mcp-inspector:latest .",
